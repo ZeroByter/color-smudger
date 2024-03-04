@@ -3,7 +3,7 @@ import { resizeCanvas } from "./colorpicker-canvas.js"
 import "./load-image.js"
 import { elementLocalToGlobal } from "./utils.js"
 
-loadImageCanvas("/color-smudger/cat.jpg")
+loadImageCanvas("cat.jpg")
 
 resizeCanvas()
 
