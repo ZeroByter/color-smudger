@@ -1,0 +1,29 @@
+<body>
+  <title>color smudger</title>
+
+  <link rel="stylesheet" href="/index.css">
+
+  <div id="load-image-container">
+    <input id="load-image-url" type="url" placeholder="Image URL" />
+    <button id="load-image-button">Load</button>
+    <input type="file" id="upload-local-image-input" accept="image/png, image/jpeg" />
+    <button>
+      <label for="upload-local-image-input">
+        Load local
+      </label>
+    </button>
+  </div>
+
+  <div id="image-canvas-container">
+    <canvas id="image-canvas"></canvas>
+    <canvas id="colorpicker-canvas"></canvas>
+  </div>
+  <canvas id="draw-canvas"></canvas>
+
+  <div id="buttons-container">
+    <button id="draw-button">Draw!</button>
+    <button id="smudge-button">Smudge!</button>
+  </div>
+
+  <script type="module" src="/index.js"></script>
+</body>

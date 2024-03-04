@@ -1,0 +1,55 @@
+body {
+  background: rgb(20, 20, 20);
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 20px;
+  align-items: center;
+}
+
+#load-image-container {
+  display: flex;
+  gap: 10px;
+}
+
+#load-image-container > input {
+  flex: 1;
+}
+
+#upload-local-image-input {
+  display: none;
+}
+
+#image-canvas-container {
+  width: 300px;
+  position: relative;
+  touch-action: none;
+}
+
+#image-canvas {
+  width: 300px;
+}
+
+#colorpicker-canvas {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  pointer-events: none;
+}
+
+#draw-canvas {
+  width: 300px;
+  height: 300px;
+  touch-action: none;
+}
+
+#buttons-container {
+  display: flex;
+  width: 300px;
+  gap: 15px;
+}
+
+#buttons-container > button {
+  flex: 1;
+  height: 50px;
+}
