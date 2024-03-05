@@ -61,7 +61,7 @@ canvas.addEventListener("mouseup", e => {
   isMouseDown = false
   lastToolPosition = [-1, -1]
 })
-canvas.addEventListener("touchend", () => {
+canvas.addEventListener("touchstart", () => {
   lastToolPosition = [-1, -1]
 })
 
