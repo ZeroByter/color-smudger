@@ -41,7 +41,7 @@ const getColorAtPosition = (x, y) => {
 canvas.addEventListener("mousemove", async e => {
   const canvasRect = canvas.getBoundingClientRect()
 
-  const x = e.offsetX / 300 * canvas.width
+  const x = e.offsetX / canvasRect.width * canvas.width
   const y = e.offsetY / canvasRect.height * canvas.height
 
   const imageData = ctx.getImageData(x - mouseAreaSize / 2, y - mouseAreaSize / 2, mouseAreaSize, mouseAreaSize)
@@ -58,7 +58,7 @@ const onTouchMove = async e => {
     const canvasRect = canvas.getBoundingClientRect()
     const [offsetX, offsetY] = elementLocalToGlobal(canvas, e.touches[0].clientX, e.touches[0].clientY)
 
-    const x = offsetX / 300 * canvas.width
+    const x = offsetX / canvasRect.width * canvas.width
     const y = offsetY / canvasRect.height * canvas.height
 
     const imageData = ctx.getImageData(x - mouseAreaSize / 2, y - mouseAreaSize / 2, mouseAreaSize, mouseAreaSize)
@@ -79,7 +79,7 @@ canvas.addEventListener("touchstart", onTouchMove)
 canvas.addEventListener("mousedown", e => {
   const canvasRect = canvas.getBoundingClientRect()
 
-  const x = e.offsetX / 300 * canvas.width
+  const x = e.offsetX / canvasRect.width * canvas.width
   const y = e.offsetY / canvasRect.height * canvas.height
 
   pickedColor = getColorAtPosition(x, y)

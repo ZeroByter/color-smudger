@@ -11,20 +11,44 @@ resizeCanvas()
 const canvas = document.querySelector("canvas[id='draw-canvas']")
 const ctx = canvas.getContext("2d")
 
-canvas.width = 300
-canvas.height = 300
+const clearCanvasBackground = () => {
+  ctx.fillStyle = "black"
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+}
+
+const setDrawCanvasSize = () => {
+  var isMobile = Math.min(window.screen.width, window.screen.height) < 768 || navigator.userAgent.indexOf("Mobi") > -1;
+
+  if (isMobile) {
+    canvas.width = window.innerWidth - 40
+  } else {
+    canvas.width = 300
+  }
+  canvas.height = canvas.width
+
+  clearCanvasBackground()
+}
+
+window.addEventListener("resize", setDrawCanvasSize)
+setDrawCanvasSize()
 
 let isMouseDown = false
 
 let mousePosition = [-1, -1]
 
-let boxSize = 100
+const getBoxSize = () => {
+  return canvas.width / 3
+}
 
 let activeTool = 0
 
-let brushSize = 20
+const getBrushSize = () => {
+  return canvas.width / 15
+}
 
 const getRectFromPosition = (inputX, inputY) => {
+  const boxSize = getBoxSize()
+
   for (let y = 0; y < 3; y++) {
     for (let x = 0; x < 3; x++) {
       const topLeftX = canvas.width / 2 - boxSize / 2 - ((x - 1) * boxSize)
@@ -50,6 +74,8 @@ canvas.addEventListener("mouseup", e => {
 })
 
 const operateTool = (mousePosition) => {
+  const brushSize = getBrushSize()
+
   if (activeTool == 0) {
     ctx.fillStyle = `rgb(${pickedColor[0]}, ${pickedColor[1]}, ${pickedColor[2]})`
 
@@ -76,6 +102,7 @@ const operateTool = (mousePosition) => {
     const mouseRect = getRectFromPosition(mousePosition[0], mousePosition[1])
 
     if (mouseRect[0] > -1) {
+      const boxSize = getBoxSize()
       const canvasColors = ctx.getImageData(mouseRect[2] + 1, mouseRect[3] + 1, boxSize - 2, boxSize - 2)
       const dataLength = canvasColors.data.length / 4
 
@@ -145,10 +172,11 @@ function think(timeDelta) {
 
 }
 
-ctx.fillStyle = "black"
-ctx.fillRect(0, 0, canvas.width, canvas.height)
+clearCanvasBackground()
 
 function render() {
+  const boxSize = getBoxSize()
+
   for (let y = 0; y < 3; y++) {
     for (let x = 0; x < 3; x++) {
       ctx.strokeStyle = "white"
