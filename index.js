@@ -28,6 +28,7 @@ const getBoxSize = () => {
 }
 
 let activeTool = 0
+let lastToolPosition = [-1, -1]
 
 const getBrushSize = () => {
   return canvas.width / 15
@@ -131,15 +132,50 @@ const operateTool = (mousePosition) => {
   }
 }
 
+const operateToolSmoothly = (mousePosition) => {
+  if (lastToolPosition[0] == -1) {
+    operateTool(mousePosition)
+  } else {
+    const distance = Math.sqrt(Math.pow(mousePosition[0] - lastToolPosition[0], 2) + Math.pow(mousePosition[1] - lastToolPosition[1], 2))
+
+    const loopDistance = Math.max(1, distance)
+
+    const rawDirection = [
+      lastToolPosition[0] - mousePosition[0],
+      lastToolPosition[1] - mousePosition[1],
+    ]
+    const magnitude = Math.sqrt(rawDirection[0] * rawDirection[0] + rawDirection[1] * rawDirection[1])
+    const direction = [ // normalized direction
+      rawDirection[0] / magnitude,
+      rawDirection[1] / magnitude
+    ]
+
+    for (let i = 0; i < loopDistance; i++) {
+      if (distance == 0) {
+        const toolFinalPosition = [
+          Math.round(mousePosition[0] + direction[0] * i),
+          Math.round(mousePosition[1] + direction[1] * i),
+        ]
+
+        operateTool(toolFinalPosition)
+      } else {
+        operateTool(mousePosition)
+      }
+    }
+  }
+
+  lastToolPosition = mousePosition
+}
+
 canvas.addEventListener("touchmove", e => {
   if (e.touches.length > 0) {
     const canvasRect = canvas.getBoundingClientRect()
 
     const [offsetX, offsetY] = elementLocalToGlobal(canvas, e.touches[0].clientX, e.touches[0].clientY)
 
-    operateTool([
-      offsetX / canvasRect.width * canvas.width,
-      offsetY / canvasRect.height * canvas.height
+    operateToolSmoothly([
+      Math.round(offsetX / canvasRect.width * canvas.width),
+      Math.round(offsetY / canvasRect.height * canvas.height)
     ])
   }
 })
@@ -149,11 +185,11 @@ canvas.addEventListener("mousemove", e => {
     const canvasRect = canvas.getBoundingClientRect()
 
     mousePosition = [
-      e.offsetX / canvasRect.width * canvas.width,
-      e.offsetY / canvasRect.height * canvas.height
+      Math.round(e.offsetX / canvasRect.width * canvas.width),
+      Math.round(e.offsetY / canvasRect.height * canvas.height)
     ]
 
-    operateTool(mousePosition)
+    operateToolSmoothly(mousePosition)
   }
 })
 
