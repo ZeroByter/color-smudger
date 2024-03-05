@@ -193,11 +193,22 @@ canvas.addEventListener("mousemove", e => {
   }
 })
 
-document.querySelector("#draw-button").addEventListener("click", e => {
+const drawButton = document.querySelector("#draw-button")
+const smudgeButton = document.querySelector("#smudge-button")
+
+const highlightActiveTool = () => {
+  drawButton.setAttribute("data-selected", activeTool == 0)
+  smudgeButton.setAttribute("data-selected", activeTool == 1)
+}
+highlightActiveTool()
+
+drawButton.addEventListener("click", e => {
   activeTool = 0
+  highlightActiveTool()
 })
-document.querySelector("#smudge-button").addEventListener("click", e => {
+smudgeButton.addEventListener("click", e => {
   activeTool = 1
+  highlightActiveTool()
 })
 
 function think(timeDelta) {
