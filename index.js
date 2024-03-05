@@ -59,6 +59,13 @@ canvas.addEventListener("mousedown", e => {
 })
 canvas.addEventListener("mouseup", e => {
   isMouseDown = false
+  lastToolPosition = [-1, -1]
+})
+canvas.addEventListener("touchend", () => {
+  lastToolPosition = [-1, -1]
+})
+canvas.addEventListener("touchcancel", () => {
+  lastToolPosition = [-1, -1]
 })
 
 const operateTool = (mousePosition) => {
@@ -151,16 +158,12 @@ const operateToolSmoothly = (mousePosition) => {
     ]
 
     for (let i = 0; i < loopDistance; i++) {
-      if (distance == 0) {
-        const toolFinalPosition = [
-          Math.round(mousePosition[0] + direction[0] * i),
-          Math.round(mousePosition[1] + direction[1] * i),
-        ]
+      const toolFinalPosition = [
+        Math.round(mousePosition[0] + direction[0] * i),
+        Math.round(mousePosition[1] + direction[1] * i),
+      ]
 
-        operateTool(toolFinalPosition)
-      } else {
-        operateTool(mousePosition)
-      }
+      operateTool(toolFinalPosition)
     }
   }
 
