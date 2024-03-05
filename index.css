@@ -52,8 +52,8 @@ button {
   gap: 15px;
 }
 
-#buttons-container > button[data-selected="true"] {
-  box-shadow: 0px 0px 10px white;
+#buttons-container > button[data-selected="false"] {
+  opacity: 0.5;
 }
 
 #buttons-container > button {
