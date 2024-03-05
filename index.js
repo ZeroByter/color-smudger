@@ -61,12 +61,9 @@ canvas.addEventListener("mouseup", e => {
   isMouseDown = false
   lastToolPosition = [-1, -1]
 })
-// canvas.addEventListener("touchend", () => {
-//   lastToolPosition = [-1, -1]
-// })
-// canvas.addEventListener("touchcancel", () => {
-//   lastToolPosition = [-1, -1]
-// })
+canvas.addEventListener("touchend", () => {
+  lastToolPosition = [-1, -1]
+})
 
 const operateTool = (mousePosition) => {
   const brushSize = getBrushSize()
