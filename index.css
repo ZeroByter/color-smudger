@@ -26,12 +26,6 @@ body {
   touch-action: none;
 }
 
-@media (max-width: 768px) {
-  #image-canvas-container {
-    width: calc(100vw - 40px);
-  }
-}
-
 #image-canvas {
   width: 100%;
 }
@@ -45,6 +39,7 @@ body {
 
 #draw-canvas {
   touch-action: none;
+  image-rendering: pixelated;
 }
 
 #buttons-container {
@@ -56,4 +51,11 @@ body {
 #buttons-container > button {
   flex: 1;
   height: 50px;
+}
+
+@media (max-width: 768px) {
+  #image-canvas-container,
+  #draw-canvas {
+    width: calc(100vw - 40px);
+  }
 }

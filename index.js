@@ -16,21 +16,8 @@ const clearCanvasBackground = () => {
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 }
 
-const setDrawCanvasSize = () => {
-  var isMobile = Math.min(window.screen.width, window.screen.height) < 768 || navigator.userAgent.indexOf("Mobi") > -1;
-
-  if (isMobile) {
-    canvas.width = window.innerWidth - 40
-  } else {
-    canvas.width = 300
-  }
-  canvas.height = canvas.width
-
-  clearCanvasBackground()
-}
-
-window.addEventListener("resize", setDrawCanvasSize)
-setDrawCanvasSize()
+canvas.width = 300
+canvas.height = canvas.width
 
 let isMouseDown = false
 
@@ -146,16 +133,25 @@ const operateTool = (mousePosition) => {
 
 canvas.addEventListener("touchmove", e => {
   if (e.touches.length > 0) {
+    const canvasRect = canvas.getBoundingClientRect()
+
     const [offsetX, offsetY] = elementLocalToGlobal(canvas, e.touches[0].clientX, e.touches[0].clientY)
 
-    operateTool([offsetX, offsetY])
-
+    operateTool([
+      offsetX / canvasRect.width * canvas.width,
+      offsetY / canvasRect.height * canvas.height
+    ])
   }
 })
 
 canvas.addEventListener("mousemove", e => {
   if (isMouseDown) {
-    mousePosition = [e.offsetX, e.offsetY]
+    const canvasRect = canvas.getBoundingClientRect()
+
+    mousePosition = [
+      e.offsetX / canvasRect.width * canvas.width,
+      e.offsetY / canvasRect.height * canvas.height
+    ]
 
     operateTool(mousePosition)
   }
