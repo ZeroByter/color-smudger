@@ -5,6 +5,12 @@ body {
   padding: 40px;
   gap: 20px;
   align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+a {
+  color: rgb(138, 138, 255);
 }
 
 button {
@@ -16,7 +22,7 @@ button {
   gap: 10px;
 }
 
-#load-image-container > input {
+#load-image-container>input {
   flex: 1;
 }
 
@@ -48,20 +54,68 @@ button {
 
 #buttons-container {
   display: flex;
+  flex-direction: column;
   width: 300px;
   gap: 15px;
 }
 
-#buttons-container > button[data-selected="false"] {
+#buttons-container button[data-selected="false"] {
   opacity: 0.5;
 }
 
-#buttons-container > button {
+#buttons-container button {
   flex: 1;
-  height: 50px;
+  min-height: 50px;
+}
+
+.buttons-hor-container,
+.buttons-ver-container {
+  display: flex;
+  gap: 15px;
+}
+
+.buttons-ver-container {
+  flex-direction: column;
+}
+
+#draw-canvas-container {
+  position: relative;
+}
+
+#create-texts-container {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#create-texts-container div {
+  width: calc(100% / 3);
+  height: calc(100% / 3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+#credits {
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 @media (max-width: 768px) {
+
   #image-canvas-container,
   #draw-canvas {
     width: calc(100vw - 40px);

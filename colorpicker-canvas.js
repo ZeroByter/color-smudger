@@ -25,7 +25,14 @@ canvasParent.addEventListener("mousemove", e => {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  ctx.drawImage(mouseAreaColorsData, mouseX - pickerSize / 2, mouseY - pickerSize)
+  ctx.fillStyle = "rgba(0,0,0,0.75)"
+  if (mouseX < canvas.width / 2) {
+    ctx.drawImage(mouseAreaColorsData, canvas.width - pickerSize, 0)
+    ctx.fillRect(canvas.width - pickerSize / 2 - 2, pickerSize / 2 - 2, 4, 4)
+  } else {
+    ctx.drawImage(mouseAreaColorsData, 0, 0)
+    ctx.fillRect(pickerSize / 2 - 2, pickerSize / 2 - 2, 4, 4)
+  }
 })
 
 const onTouchMove = e => {
@@ -35,7 +42,14 @@ const onTouchMove = e => {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    ctx.drawImage(mouseAreaColorsData, mouseX - pickerSize / 2, mouseY - pickerSize)
+    ctx.fillStyle = "rgba(0,0,0,0.75)"
+    if (mouseX < canvas.width / 2) {
+      ctx.drawImage(mouseAreaColorsData, canvas.width - pickerSize, 0)
+      ctx.fillRect(canvas.width - pickerSize / 2 - 2, pickerSize / 2 - 2, 4, 4)
+    } else {
+      ctx.drawImage(mouseAreaColorsData, 0, 0)
+      ctx.fillRect(pickerSize / 2 - 2, pickerSize / 2 - 2, 4, 4)
+    }
   }
 }
 

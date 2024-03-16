@@ -1,17 +1,19 @@
 <body>
-  <title>color smudger</title>
+  <title>Palette Creator</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="index.css" />
 
   <div id="load-image-container">
     <input id="load-image-url" type="url" placeholder="Image URL" />
     <button id="load-image-button">Load</button>
-    <input type="file" id="upload-local-image-input" accept="image/png, image/jpeg" />
+    <input
+      type="file"
+      id="upload-local-image-input"
+      accept="image/png, image/jpeg"
+    />
     <button>
-      <label for="upload-local-image-input">
-        Load local
-      </label>
+      <label for="upload-local-image-input"> Load local </label>
     </button>
   </div>
 
@@ -19,11 +21,42 @@
     <canvas id="image-canvas"></canvas>
     <canvas id="colorpicker-canvas"></canvas>
   </div>
-  <canvas id="draw-canvas"></canvas>
+  <div id="draw-canvas-container">
+    <canvas id="draw-canvas"></canvas>
+    <div id="create-texts-container">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 
   <div id="buttons-container">
-    <button id="draw-button">Draw!</button>
-    <button id="smudge-button">Smudge!</button>
+    <div class="buttons-hor-container">
+      <button id="draw-brush-button">Draw brush!</button>
+      <button id="draw-fill-button">Draw fill!</button>
+    </div>
+    <div class="buttons-ver-container">
+      <button id="smudge-button">Smudge!</button>
+      <button id="create-button">Create!</button>
+    </div>
+  </div>
+
+  <div id="credits">
+    <div>
+      Made by <a href="https://www.zerobyter.net/" target="_blank">ZeroByter</a>
+    </div>
+    <div>
+      <a href="https://github.com/ZeroByter/color-smudger" target="_blank"
+        >Fork me!</a
+      >
+    </div>
+    <div>Idea by Makritza</div>
   </div>
 
   <script type="module" src="index.js"></script>
