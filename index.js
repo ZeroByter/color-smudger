@@ -335,6 +335,21 @@ smudgeButton.addEventListener("click", e => {
   highlightActiveTool()
 })
 
+/** @type {HTMLDivElement} */
+const imageCanvasContainer = document.querySelector("#image-canvas-container")
+
+let imageVisible = true;
+
+document.querySelector("#toggle-image-button").addEventListener("click", () => {
+  imageVisible = !imageVisible
+
+  if (imageVisible) {
+    imageCanvasContainer.style.display = null
+  } else {
+    imageCanvasContainer.style.display = "none"
+  }
+})
+
 const createTextsDivs = document.querySelectorAll("#create-texts-container div")
 const prompts = ["Background", "Hair", "Top", "Bottom", "Skin", "Eyes", "Shoes", "Accessories", "Extra"]
 
